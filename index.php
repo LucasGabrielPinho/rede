@@ -6,7 +6,7 @@
         <!-- CSS -->
         <link rel="stylesheet" href="src/css/bootstrap.min.css">
         <link rel="stylesheet" href="src/css/main.css">
-        <title>TNGamers</title>
+        <title>TNG - Rede Social</title>
     </head>
     <body>
         <h1>teste</h1>
