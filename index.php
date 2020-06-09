@@ -9,7 +9,7 @@
         <title>TNG - Rede Social</title>
     </head>
     <body>
-        <h1>Teste 1</h1>
+        <h1>Teste 2</h1>
         <!-- Optional JavaScript -->
         <script src="src/js/jquery-3.5.1.slim.min.js"></script>
         <script src="src/js/popper.min.js"></script>
