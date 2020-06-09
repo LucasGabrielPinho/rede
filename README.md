@@ -1,0 +1,9 @@
+# rede
+Olá, este é um projeto desnvolvido por Lucas Pinho e Rodrigo Coninck
+
+No projeto será utilizado:
+- PHP;
+- Js;
+- Bootstrap;
+- MySql.
+
