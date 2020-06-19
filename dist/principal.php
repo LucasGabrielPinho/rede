@@ -48,47 +48,54 @@
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-3">
-                <div class="col-md-12 bg-dark pt-3 rounded">
+                <div class="col-md-12 border pt-3 rounded">
                     <div class="card">
                         <img class="card-img-top" src="https://img.freepik.com/vetores-gratis/imagem-realista-de-um-raio-eletrico-starburst_1284-21466.jpg?size=338&ext=jpg" alt="Imagem de capa do card">
-                        <div class="card-body bg-danger">
-                            <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+                        <div class="card-body">
+                            <label class="card-text">Xunda</label>
                         </div>
                     </div>
+                    <nav class="nav flex-column">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">Perfil</a>
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">Seguidores</a>
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">Editar Perfil</a>
+                    </nav>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 px-0">
                 <div class="row">
-                    <div class="col-md-12 bg-secondary rounded">
-                        <div class="form-group">
-                            <textarea class="form-control my-3" id="exampleFormControlTextarea1" rows="1" placeholder="Compartilhe algo"></textarea>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input">
-                                    <label class="custom-file-label" for="customFile">Imagem</label>
-                                </div>
+                    <div class="col-md-12">
+                        <div class="col-md-12 bg-secondary rounded py-2">
+                            <div class="form-group">
+                                <textarea class="form-control my-3" id="exampleFormControlTextarea1" rows="1" placeholder="Compartilhe algo"></textarea>
                             </div>
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        <option selected>Escolha o jogo...</option>
-                                        <option>League Of Legends</option>
-                                        <option>CS:GO</option>
-                                        <option>Tibia</option>
-                                        <option>Ragnarok</option>
-                                        <option>Hotel Habbo</option>
-                                    </select>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input">
+                                        <label class="custom-file-label" for="customFile">Imagem</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-success btn-block">Publicar</button>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <select class="form-control" id="exampleFormControlSelect1">
+                                            <option selected>Escolha o jogo...</option>
+                                            <option>League Of Legends</option>
+                                            <option>CS:GO</option>
+                                            <option>Tibia</option>
+                                            <option>Ragnarok</option>
+                                            <option>Hotel Habbo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-success btn-block">Publicar</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12 px-0">
                     <div class="card p-3 border my-3">
                         <div class="card-body">
                             <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um conteúdo adicional. Este conteúdo é um pouco maior, para demonstração.</p>
@@ -103,7 +110,7 @@
                             <button class="btn btn-success btn-sm float-right" for="exampleFormControlTextarea">Enviar</button>
                         </div>
                         <div class="border">
-                            <img src="https://lh3.googleusercontent.com/proxy/8E58nNL9vv4o2cp7F6GX6jPU3eg4mXcXDC86kie5HPhDhMOv7xdjymjpfyP8x7xHe6UnDlKYKYGQTM5kMMjrgXs5xWV3tGCVzwyApLqGUizxpdRPR-u1VJRwXz4ncNB0KWibXtq07swUAenL3a7orFxudnXa6nF6cODnVmEXNHtJ9EM4Eyuv" alt="" width="40" height="40">
+                            <img src="../src/img/User.PNG" alt="" width="40" height="40">
                             <label for="">Nome do comentarista</label>
                             <hr>
                             <div class="col-md-12">
@@ -125,7 +132,7 @@
                             <button class="btn btn-success btn-sm float-right" for="exampleFormControlTextarea">Enviar</button>
                         </div>
                         <div class="border my-3">
-                            <img src="https://lh3.googleusercontent.com/proxy/8E58nNL9vv4o2cp7F6GX6jPU3eg4mXcXDC86kie5HPhDhMOv7xdjymjpfyP8x7xHe6UnDlKYKYGQTM5kMMjrgXs5xWV3tGCVzwyApLqGUizxpdRPR-u1VJRwXz4ncNB0KWibXtq07swUAenL3a7orFxudnXa6nF6cODnVmEXNHtJ9EM4Eyuv" alt="" width="40" height="40">
+                            <img src="../src/img/User.PNG" alt="" width="40" height="40">
                             <label for="">Nome do comentarista</label>
                             <hr>
                             <div class="col-md-12">
@@ -133,7 +140,7 @@
                             </div>
                         </div>
                         <div class="border my-3">
-                            <img src="https://lh3.googleusercontent.com/proxy/8E58nNL9vv4o2cp7F6GX6jPU3eg4mXcXDC86kie5HPhDhMOv7xdjymjpfyP8x7xHe6UnDlKYKYGQTM5kMMjrgXs5xWV3tGCVzwyApLqGUizxpdRPR-u1VJRwXz4ncNB0KWibXtq07swUAenL3a7orFxudnXa6nF6cODnVmEXNHtJ9EM4Eyuv" alt="" width="40" height="40">
+                            <img src="../src/img/User.PNG" alt="" width="40" height="40">
                             <label for="">Arnaldo Cesar Coelho</label>
                             <hr>
                             <div class="col-md-12">
@@ -141,7 +148,7 @@
                             </div>
                         </div>
                         <div class="border my-3">
-                            <img src="https://lh3.googleusercontent.com/proxy/8E58nNL9vv4o2cp7F6GX6jPU3eg4mXcXDC86kie5HPhDhMOv7xdjymjpfyP8x7xHe6UnDlKYKYGQTM5kMMjrgXs5xWV3tGCVzwyApLqGUizxpdRPR-u1VJRwXz4ncNB0KWibXtq07swUAenL3a7orFxudnXa6nF6cODnVmEXNHtJ9EM4Eyuv" alt="" width="40" height="40">
+                            <img src="../src/img/User.PNG" alt="" width="40" height="40">
                             <label for="">Galvão</label>
                             <hr>
                             <div class="col-md-12">
@@ -151,8 +158,63 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 bg-dark">
-                <h1>Teste 3</h1>
+            <div class="col-md-3">
+                <div class="col-md-12 border rounded">
+                    <h5 class=" pt-3">Sugestões para seguir...</h5>
+                    <hr>
+                    <nav class="nav flex-column">
+                        <div class="col-md-12 p-0">
+                            <img class="float-left rounded-circle" src="../src/img/User.PNG" alt="" width="40" height="40">
+                            <button class="btn btn-success float-right btn-sm">Seguir</button>
+                            <label for="" class="text-success">Yoda</label><br>
+                            <label class="" style="font-size:12px;" for="">Segue você</label>
+                            <hr>
+                        </div>
+                        <div class="col-md-12 p-0">
+                            <img class="float-left rounded-circle" src="../src/img/User.PNG" alt="" width="40" height="40">
+                            <button class="btn btn-success float-right btn-sm">Seguir</button>
+                            <label for="" class="text-success">Jukes</label><br>
+                            <label class="" style="font-size:12px;" for="">Segue League Of Legends</label>
+                            <hr>
+                        </div>
+                        <div class="col-md-12 p-0">
+                            <img class="float-left rounded-circle" src="../src/img/User.PNG" alt="" width="40" height="40">
+                            <button class="btn btn-success float-right btn-sm">Seguir</button>
+                            <label for="" class="text-success">Fallen</label><br>
+                            <label class="" style="font-size:12px;" for="">Seguido por Lucas Pinho</label>
+                            <hr>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Recipient:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Send message</button>
+                </div>
             </div>
         </div>
     </div>
