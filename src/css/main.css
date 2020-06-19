@@ -47,3 +47,6 @@ html,
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 }
+.custom-file-label::after {
+	content: url(https://img.icons8.com/office/16/000000/add-image.png);
+}
