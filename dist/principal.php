@@ -1,3 +1,9 @@
+<?php session_start();
+$default = "../src/img/default.png";
+include "../querys/banco.php";
+$sql2 = "select * from tb_jogos";
+$resultado2 = mysqli_query($conexao, $sql2);
+?>
 <!doctype html>
 <html lang="pr-br">
 
@@ -50,14 +56,21 @@
             <div class="col-md-3">
                 <div class="col-md-12 border pt-3 rounded">
                     <div class="card">
-                        <img class="card-img-top" src="https://img.freepik.com/vetores-gratis/imagem-realista-de-um-raio-eletrico-starburst_1284-21466.jpg?size=338&ext=jpg" alt="Imagem de capa do card">
-                        <div class="card-body">
-                            <label class="card-text">Xunda</label>
+                        <img class="card-img-top" src="
+                            <?php
+                            if ($_SESSION['avatarUsuario'] == $default) {
+                                echo $default;
+                            } else {
+                                echo "../src/img/avatar/" . $_SESSION['avatarUsuario'];
+                            }
+
+
+                            ?>" alt="Imagem de capa do card">
+                        <div class="card-body text-center">
+                            <label class="card-text"><?php echo $_SESSION['nomeUsuario'] ?></label>
                         </div>
                     </div>
                     <nav class="nav flex-column">
-                        <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">Perfil</a>
-                        <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">Seguidores</a>
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">Editar Perfil</a>
                     </nav>
                 </div>
@@ -79,12 +92,11 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <select class="form-control" id="exampleFormControlSelect1">
-                                            <option selected>Escolha o jogo...</option>
-                                            <option>League Of Legends</option>
-                                            <option>CS:GO</option>
-                                            <option>Tibia</option>
-                                            <option>Ragnarok</option>
-                                            <option>Hotel Habbo</option>
+                                            <?php foreach ($resultado2 as $jogo) { ?>
+                                                <option value="<?php echo $jogo['jogCodigo']; ?>" 4>
+                                                    <?php echo $jogo['jogNome']; ?>
+                                                </option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                 </div>
@@ -95,68 +107,38 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 px-0">
-                    <div class="card p-3 border my-3">
-                        <div class="card-body">
-                            <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um conteúdo adicional. Este conteúdo é um pouco maior, para demonstração.</p>
-                            <p class="card-text"><small class="text-muted">Atualizados 3 minutos atrás</small></p>
-                        </div>
-                        <img class="card-img-bottom" src="https://i.pinimg.com/originals/2b/8a/45/2b8a454e233a534d724c78e3f4914abd.jpg" alt="Imagem de capa do card">
-                        <div class="form-group my-1">
-                            <button class="btn btn-primary btn-sm">Like</button>
-                            <br>
-                            <textarea class="form-control my-1" id="exampleFormControlTextarea" rows="1" placeholder="Deixe seu comentário"></textarea>
-                            <label for="">Comentários</label>
-                            <button class="btn btn-success btn-sm float-right" for="exampleFormControlTextarea">Enviar</button>
-                        </div>
-                        <div class="border">
-                            <img src="../src/img/User.PNG" alt="" width="40" height="40">
-                            <label for="">Nome do comentarista</label>
-                            <hr>
-                            <div class="col-md-12">
-                                <label for="">Esse avião é muito supimpa Esse avião é muito supimpa Esse avião é muito supimpa</label>
+                <?php
+                $sqlPost = "SELECT * FROM tb_postagens INNER JOIN tb_usuarios WHERE tb_postagens.FK_usuCodigo = tb_usuarios.usuCodigo";
+                $resultadoPost = mysqli_query($conexao, $sqlPost);
+                ?>
+
+                <?php foreach ($resultadoPost as $postagem) { ?>
+
+                    <div class="col-md-12 px-0">
+                        <div class="card p-3 border my-3">
+                            <div class="card-body">
+                                <p><?php echo $postagem['usuNome'] ?></p>
+                                <p class="card-text"><?php echo $postagem['postConteudo'] ?></p>
+                            </div>
+                            <img class="card-img-bottom" src="<?php echo '../src/img/postagem/' . $postagem['postImg'] ?>" alt="Imagem de capa do card">
+                            <div class="form-group my-1">
+                                <button class="btn btn-primary btn-sm">Like</button>
+                                <br>
+                                <textarea class="form-control my-1" id="exampleFormControlTextarea" rows="1" placeholder="Deixe seu comentário"></textarea>
+                                <label for="">Comentários</label>
+                                <button class="btn btn-success btn-sm float-right" for="exampleFormControlTextarea">Enviar</button>
+                            </div>
+                            <div class="border">
+                                <img src="../src/img/User.PNG" alt="" width="40" height="40">
+                                <label for="">Nome do comentarista</label>
+                                <hr>
+                                <div class="col-md-12">
+                                    <label for="">Esse avião é muito supimpa Esse avião é muito supimpa Esse avião é muito supimpa</label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card p-3 border my-3">
-                        <div class="card-body">
-                            <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um conteúdo adicional. Este conteúdo é um pouco maior, para demonstração.</p>
-                            <p class="card-text"><small class="text-muted">Atualizados 3 minutos atrás</small></p>
-                        </div>
-                        <img class="card-img-bottom" src="https://i.pinimg.com/originals/2b/8a/45/2b8a454e233a534d724c78e3f4914abd.jpg" alt="Imagem de capa do card">
-                        <div class="form-group my-1">
-                            <button class="btn btn-primary btn-sm">Like</button>
-                            <br>
-                            <textarea class="form-control my-1" id="exampleFormControlTextarea" rows="1" placeholder="Deixe seu comentário"></textarea>
-                            <label for="">Comentários</label>
-                            <button class="btn btn-success btn-sm float-right" for="exampleFormControlTextarea">Enviar</button>
-                        </div>
-                        <div class="border my-3">
-                            <img src="../src/img/User.PNG" alt="" width="40" height="40">
-                            <label for="">Nome do comentarista</label>
-                            <hr>
-                            <div class="col-md-12">
-                                <label for="">Esse avião é muito supimpa Esse avião é muito supimpa Esse avião é muito supimpa</label>
-                            </div>
-                        </div>
-                        <div class="border my-3">
-                            <img src="../src/img/User.PNG" alt="" width="40" height="40">
-                            <label for="">Arnaldo Cesar Coelho</label>
-                            <hr>
-                            <div class="col-md-12">
-                                <label for="">Esse avião é muito supimpa Esse avião é muito supimpa Esse avião é muito supimpa</label>
-                            </div>
-                        </div>
-                        <div class="border my-3">
-                            <img src="../src/img/User.PNG" alt="" width="40" height="40">
-                            <label for="">Galvão</label>
-                            <hr>
-                            <div class="col-md-12">
-                                <label for="">Pode isso Arnaldo?</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
             <div class="col-md-3">
                 <div class="col-md-12 border rounded">
@@ -194,27 +176,30 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Perfil</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form action="../querys/editarUsuario.php" method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Recipient:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <label for="recipient-name" class="col-form-label">Nome</label>
+                            <input type="text" class="form-control" id="fNome" name="fNome" value="<?php echo $_SESSION['nomeUsuario'] ?>">
+
+                            <label for="message-text" class="col-form-label">Senha</label>
+                            <input type="password" class="form-control" id="fSenha" name="fSenha">
+
+                            <label for="message-text" class="col-form-label">Avatar</label>
+                            <input type="file" class="form-control" id="fAvatar" name="fAvatar">
                         </div>
-                        <div class="form-group">
-                            <label for="message-text" class="col-form-label">Message:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send message</button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Send message</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
