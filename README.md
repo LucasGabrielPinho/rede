@@ -7,3 +7,5 @@ No projeto será utilizado:
 - Bootstrap;
 - MySql.
 
+Para aplicação funcionar necessário importar o banco que se encontra no mesmo diretório.
+

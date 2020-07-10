@@ -17,13 +17,11 @@ if ($senha == $confSenha) {
     if ($qtdLinhas == 0) {
         $sql = "insert into tb_usuarios (usuNome, usuEmail, usuSenha, usuAvatar) values ('$nome','$email','$senha', '$avatar')";
         $resultado = mysqli_query($conexao, $sql);
-        $alert = "success";
-        $msg = "Usuario cadastrado com sucesso!";
+        header("Location: ../dist/acesso.php");
     } else {
         $msg = "Esse e-mail já está cadastrado";
     }
 } else {
     $msg = "As senhas devem ser iguais";
+    header("Location: ../dist/cadastro.php?msg=$msg&alert=$alert");
 }
-
-header("Location: ../dist/cadastro.php?msg=$msg&alert=$alert");

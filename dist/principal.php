@@ -3,9 +3,16 @@ $default = "../src/img/default.png";
 include "../querys/banco.php";
 $sql2 = "select * from tb_jogos";
 $resultado2 = mysqli_query($conexao, $sql2);
+if (!empty($_GET['msg'])) {
+    echo $_GET['msg'];
+}
+if (empty($_SESSION['codigoUsuario']))
+{
+    header("Location: acesso.php");    
+}
 ?>
 <!doctype html>
-<html lang="pr-br">
+<html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
@@ -19,7 +26,7 @@ $resultado2 = mysqli_query($conexao, $sql2);
 <body class="">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">Container</a>
+            <a class="navbar-brand" href="#">Rede Social</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -27,21 +34,10 @@ $resultado2 = mysqli_query($conexao, $sql2);
             <div class="collapse navbar-collapse" id="navbarsExample07">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="principal.php">Inicio <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown07">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../querys/sair.php">Sair</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-md-0">
@@ -77,38 +73,41 @@ $resultado2 = mysqli_query($conexao, $sql2);
             </div>
             <div class="col-md-6 px-0">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12 bg-secondary rounded py-2">
-                            <div class="form-group">
-                                <textarea class="form-control my-3" id="exampleFormControlTextarea1" rows="1" placeholder="Compartilhe algo"></textarea>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input">
-                                        <label class="custom-file-label" for="customFile">Imagem</label>
-                                    </div>
+                    <form class="" action="../querys/criarPostagem.php" method="POST" enctype="multipart/form-data">
+                        <div class="col-md-12">
+                            <div class="col-md-12 bg-secondary rounded py-2">
+                                <div class="form-group">
+                                    <textarea class="form-control my-3" name="fTextoPost" id="fTextoPost" rows="1" placeholder="Compartilhe algo"></textarea>
                                 </div>
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <select class="form-control" id="exampleFormControlSelect1">
-                                            <?php foreach ($resultado2 as $jogo) { ?>
-                                                <option value="<?php echo $jogo['jogCodigo']; ?>" 4>
-                                                    <?php echo $jogo['jogNome']; ?>
-                                                </option>
-                                            <?php } ?>
-                                        </select>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="custom-file">
+                                            <input type="file" id="fImgPost" name="fImgPost" class="custom-file-input">
+                                            <label class="custom-file-label" for="customFile">Imagem</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <button class="btn btn-success btn-block">Publicar</button>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <select name="fJogoPost" class="form-control" id="fJogoPost">
+                                                <option disabled selected>Selecione o Jogo...</option>
+                                                <?php foreach ($resultado2 as $jogo) { ?>
+                                                    <option value="<?php echo $jogo['jogCodigo']; ?>" 4>
+                                                        <?php echo $jogo['jogNome']; ?>
+                                                    </option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-success btn-block">Publicar</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <?php
-                $sqlPost = "SELECT * FROM tb_postagens INNER JOIN tb_usuarios WHERE tb_postagens.FK_usuCodigo = tb_usuarios.usuCodigo";
+                $sqlPost = "SELECT * FROM tb_postagens INNER JOIN tb_usuarios INNER JOIN tb_jogos WHERE tb_postagens.FK_usuCodigo = tb_usuarios.usuCodigo and tb_postagens.FK_jogCodigo = tb_jogos.jogCodigo order by tb_postagens.postCodigo DESC";
                 $resultadoPost = mysqli_query($conexao, $sqlPost);
                 ?>
 
@@ -117,25 +116,52 @@ $resultado2 = mysqli_query($conexao, $sql2);
                     <div class="col-md-12 px-0">
                         <div class="card p-3 border my-3">
                             <div class="card-body">
-                                <p><?php echo $postagem['usuNome'] ?></p>
-                                <p class="card-text"><?php echo $postagem['postConteudo'] ?></p>
+                                <img class="rounded-circle" src="
+                                    <?php
+                                    if ($postagem['usuAvatar'] == $default) {
+                                        echo $default;
+                                    } else {
+                                        echo "../src/img/avatar/" . $postagem['usuAvatar'];
+                                    }
+                                    ?>
+                                " alt="" width="40" height="40">
+
+                                <label><?php echo $postagem['usuNome'] ?></label>
+                                <label>- está jogando - <?php echo $postagem['jogNome'] ?></label>
+                                <p class="card-text mt-3"><?php echo $postagem['postConteudo'] ?></p>
                             </div>
                             <img class="card-img-bottom" src="<?php echo '../src/img/postagem/' . $postagem['postImg'] ?>" alt="Imagem de capa do card">
-                            <div class="form-group my-1">
-                                <button class="btn btn-primary btn-sm">Like</button>
+                            <form class="form-group my-1" action="../querys/criarComentario.php" method="POST">
+                                <a href="javascript:void(0);" class="btn btn-primary btn-sm text-light">Like</a>
                                 <br>
-                                <textarea class="form-control my-1" id="exampleFormControlTextarea" rows="1" placeholder="Deixe seu comentário"></textarea>
+                                <input id="fPostComent" name="fPostComent" class="d-none" type="text" value="<?php echo $postagem['postCodigo']; ?>">
+                                <textarea class="form-control my-1" name="fComentario" id="fComentario" rows="1" placeholder="Deixe seu comentário"></textarea>
                                 <label for="">Comentários</label>
-                                <button class="btn btn-success btn-sm float-right" for="exampleFormControlTextarea">Enviar</button>
-                            </div>
-                            <div class="border">
-                                <img src="../src/img/User.PNG" alt="" width="40" height="40">
-                                <label for="">Nome do comentarista</label>
-                                <hr>
-                                <div class="col-md-12">
-                                    <label for="">Esse avião é muito supimpa Esse avião é muito supimpa Esse avião é muito supimpa</label>
-                                </div>
-                            </div>
+                                <button class="btn btn-success btn-sm float-right" for="fComentario" type="submit">Enviar</button>
+                            </form>
+                            <?php
+                            $sqlComent = "SELECT tb_usuarios.usuNome, tb_usuarios.usuAvatar, tb_comentarios.comentario, tb_postagens.postCodigo FROM tb_comentarios INNER JOIN tb_postagens INNER JOIN tb_usuarios WHERE tb_comentarios.FK_postCodigo = tb_postagens.postCodigo AND tb_comentarios.FK_usuCodigo=tb_usuarios.usuCodigo";
+                            $resultadoComent = mysqli_query($conexao, $sqlComent);
+                            ?>
+                            <?php foreach ($resultadoComent as $comentario) { ?>
+                                <?php if ($comentario['postCodigo'] == $postagem['postCodigo']) { ?>
+                                    <div class="border mt-2">
+                                        <img class="rounded-circle m-2" src="
+                                            <?php
+                                            if ($comentario['usuAvatar'] == $default) {
+                                                echo $default;
+                                            } else {
+                                                echo "../src/img/avatar/" . $comentario['usuAvatar'];
+                                            }
+                                            ?>
+                                        " alt="" width="40" height="40">
+                                        <label for=""><?php echo $comentario['usuNome']; ?></label>
+                                        <div class="col-md-12" style="border-top: 1px solid #99999955;">
+                                            <label for=""><?php echo $comentario['comentario']; ?></label>
+                                        </div>
+                                    </div>
+                            <?php }
+                            } ?>
                         </div>
                     </div>
                 <?php } ?>
@@ -196,8 +222,8 @@ $resultado2 = mysqli_query($conexao, $sql2);
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Send message</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Alterar</button>
                     </div>
                 </form>
             </div>

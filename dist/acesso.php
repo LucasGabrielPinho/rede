@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!empty($_SESSION['codigoUsuario']))
+{
+    header("Location: principal.php");    
+}
+
+?>
 <!doctype html>
 <html lang="pr-br">
 
